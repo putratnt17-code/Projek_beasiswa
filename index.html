@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aplikasi penentuan kelayakan penerima beasiswa menggunakan logika proposisi.">
+  <title>Sistem Kelayakan Beasiswa</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark" aria-hidden="true">🎓</div>
+    <div>
+      <p class="eyebrow">PROJECT MATEMATIKA DISKRIT</p>
+      <h1>Sistem Kelayakan Beasiswa</h1>
+      <p class="subtitle">Pemeriksaan kelayakan berdasarkan logika proposisi</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro">
+      <div>
+        <h2>Data Mahasiswa</h2>
+        <p>Masukkan data mahasiswa untuk memeriksa apakah memenuhi kriteria simulasi beasiswa.</p>
+      </div>
+      <div class="formula">
+        <span>Rumus logika</span>
+        <strong>F = (P ∧ Q) ∨ R</strong>
+        <small>P: IPK ≥ 3,50 · Q: tidak menerima beasiswa lain · R: juara kompetisi nasional</small>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h3>Tambah mahasiswa</h3>
+      <form id="studentForm">
+        <div class="form-grid">
+          <label class="field field-wide">
+            <span>Nama mahasiswa</span>
+            <input id="name" type="text" placeholder="Contoh: Andi Saputra" maxlength="60" required>
+          </label>
+          <label class="field">
+            <span>IPK (0,00–4,00)</span>
+            <input id="gpa" type="number" min="0" max="4" step="0.01" placeholder="Contoh: 3.75" required>
+          </label>
+          <label class="field">
+            <span>Menerima beasiswa lain?</span>
+            <select id="otherScholarship" required>
+              <option value="" selected disabled>-- Pilih jawaban --</option>
+              <option value="no">Tidak</option>
+              <option value="yes">Ya</option>
+            </select>
+          </label>
+          <label class="field field-wide">
+            <span>Pemenang kompetisi nasional?</span>
+            <select id="winner" required>
+              <option value="" selected disabled>-- Pilih jawaban --</option>
+              <option value="yes">Ya</option>
+              <option value="no">Tidak</option>
+            </select>
+          </label>
+        </div>
+        <div class="form-actions">
+          <button class="button primary" type="submit">Periksa dan tambahkan</button>
+          <button class="button secondary" type="reset">Kosongkan form</button>
+        </div>
+        <p class="hint">Data tersimpan di browser pada perangkat ini (local storage).</p>
+      </form>
+    </section>
+
+    <section class="stats" aria-label="Ringkasan data">
+      <article class="stat-card"><span>Total mahasiswa</span><strong id="totalCount">0</strong></article>
+      <article class="stat-card"><span>Layak</span><strong id="eligibleCount" class="green">0</strong></article>
+      <article class="stat-card"><span>Tidak layak</span><strong id="notEligibleCount" class="red">0</strong></article>
+    </section>
+
+    <section class="panel">
+      <div class="table-heading">
+        <div>
+          <h3>Daftar hasil pemeriksaan</h3>
+          <p>Hasil ditentukan otomatis menggunakan rumus F = (P AND Q) OR R.</p>
+        </div>
+        <button id="clearAll" class="button danger-outline" type="button">Hapus semua data</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Nama</th>
+              <th>IPK</th>
+              <th>P</th>
+              <th>Q</th>
+              <th>R</th>
+              <th>F</th>
+              <th>Hasil</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="studentTable">
+            <tr class="empty-row"><td colspan="9">Belum ada data mahasiswa. Silakan tambahkan melalui formulir di atas.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">Keterangan: 1 = Benar, 0 = Salah. P = IPK minimal 3,50; Q = tidak menerima beasiswa lain; R = pemenang kompetisi nasional.</p>
+    </section>
+
+    <section class="explanation">
+      <h3>Bagaimana sistem menentukan hasil?</h3>
+      <ol>
+        <li>Sistem memeriksa apakah IPK mahasiswa minimal 3,50 untuk menentukan nilai P.</li>
+        <li>Sistem memeriksa apakah mahasiswa tidak menerima beasiswa lain untuk menentukan nilai Q.</li>
+        <li>Sistem memeriksa status pemenang kompetisi nasional untuk menentukan nilai R.</li>
+        <li>Sistem menghitung <strong>F = (P AND Q) OR R</strong>. Jika F = 1, hasilnya Layak. Jika F = 0, hasilnya Tidak Layak.</li>
+      </ol>
+      <p class="disclaimer">Catatan: Kriteria ini merupakan aturan simulasi untuk keperluan project Matematika Diskrit, bukan ketentuan resmi dari penyelenggara beasiswa tertentu.</p>
+    </section>
+  </main>
+
+  <footer>Project Matematika Diskrit · Logika Proposisi dan Aljabar Boolean</footer>
+  <script src="script.js"></script>
+</body>
+</html>
